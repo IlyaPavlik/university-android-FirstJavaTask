@@ -7,13 +7,15 @@ public class InsertionSort implements Algorithm {
 	@Override
 	public void sort(Device[] devices, boolean ascendingSort) {
 		for (int i = 1; i < devices.length; i++) {
-			Device currElem = devices[i];
-			int prevKey = i - 1;
-			while (prevKey >= 0 && devices[prevKey].compareTo(currElem) > 1) {
-				devices[prevKey + 1] = devices[prevKey];
-				devices[prevKey] = currElem;
-				prevKey--;
+			Device temp = devices[i];
+			int j = i - 1;
+			while (j >= 0 && ((devices[j].compareTo(temp) > 0 && ascendingSort)
+					|| (devices[j].compareTo(temp) < 0 && !ascendingSort)))
+			{
+				devices[j + 1] = devices[j];
+				j--;
 			}
+			devices[j + 1] = temp;
 		}
 	}
 

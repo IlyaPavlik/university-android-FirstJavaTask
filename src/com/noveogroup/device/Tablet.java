@@ -1,17 +1,9 @@
 package com.noveogroup.device;
 
-public class Tablet implements Device {
+public class Tablet extends MobileDevice {
 
-	@Override
-	public int compareTo(Device o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Tablet(int price) {
+		this.setPrice(price);
 	}
-
-	@Override
-	public int getPrice() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 }

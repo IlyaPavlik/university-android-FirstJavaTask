@@ -7,36 +7,39 @@ import com.noveogroup.device.Device;
 public class QuickSort implements Algorithm {
 
 	public static final Random RND = new Random();
+	private boolean ascendingSort;
 	
 	@Override
 	public void sort(Device[] devices, boolean ascendingSort) {
+		this.ascendingSort = ascendingSort;
 		qsort(devices, 0, devices.length - 1);
 	}
 
-	private void qsort(Device[] array, int begin, int end) {
+	private void qsort(Device[] devices, int begin, int end) {
 		if (end > begin) {
-			int index = partition(array, begin, end);
-			qsort(array, begin, index - 1);
-			qsort(array, index + 1, end);
+			int index = partition(devices, begin, end);
+			qsort(devices, begin, index - 1);
+			qsort(devices, index + 1, end);
 		}
 	}
 
-	private int partition(Device[] array, int begin, int end) {
+	private int partition(Device[] devices, int begin, int end) {
 		int index = begin + RND.nextInt(end - begin + 1);
-		Device pivot = array[index];
-		swap(array, index, end);
+		Device currElem = devices[index];
+		swap(devices, index, end);
 		for (int i = index = begin; i < end; ++i) {
-			if (array[i].compareTo(pivot) <= 0) {
-				swap(array, index++, i);
+			if ((devices[i].compareTo(currElem) < 0 && ascendingSort)
+					|| (devices[i].compareTo(currElem) > 0 && !ascendingSort)) {
+				swap(devices, index++, i);
 			}
 		}
-		swap(array, index, end);
+		swap(devices, index, end);
 		return (index);
 	}
 
-	private void swap(Object[] array, int i, int j) {
-		Object tmp = array[i];
-		array[i] = array[j];
-		array[j] = tmp;
+	private void swap(Object[] devices, int i, int j) {
+		Object tmp = devices[i];
+		devices[i] = devices[j];
+		devices[j] = tmp;
 	}
 }
